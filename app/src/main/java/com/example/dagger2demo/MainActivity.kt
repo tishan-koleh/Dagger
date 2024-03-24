@@ -5,8 +5,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    @Inject
+     lateinit var userRegistrationService: UserRegistrationService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -17,17 +20,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-//        val smartfone = Smartfone(Battery(),SimCard(ServiceProvider()),Memory())
-//        smartfone.makeCall()
-//        val userRepositary = UserRepositary()
-//        val emailService = EmailService()
-//        val userRegistrationService = UserRegistrationService(userRepositary,emailService)
 
         val component = DaggerUserRegistrationComponent.builder().build()
-
-        val userRegistrationService = component.getUserRegistration()
+        component.inject(this)
         userRegistrationService.registerUser("xyzzzz","111111")
 
-        val emailService = component.getEmailService()
+
     }
 }

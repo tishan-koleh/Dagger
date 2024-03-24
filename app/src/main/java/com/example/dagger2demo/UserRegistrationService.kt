@@ -4,11 +4,11 @@ import android.provider.ContactsContract.CommonDataKinds.Email
 import javax.inject.Inject
 
 class UserRegistrationService @Inject constructor(private val userRepositary: UserRepositary ,
-                              private val emailService: EmailService) {
+                              private val notificationService: NotificationService) {
 
     fun registerUser(email: String,password:String){
         userRepositary.saveUser(email,password)
-        emailService.send(email,"xyz","abcd")
+        notificationService.send(email,"xyz","abcd")
     }
 }
 
