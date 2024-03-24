@@ -17,7 +17,17 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val smartfone = Smartfone(Battery(),SimCard(ServiceProvider()),Memory())
-        smartfone.makeCall()
+//        val smartfone = Smartfone(Battery(),SimCard(ServiceProvider()),Memory())
+//        smartfone.makeCall()
+//        val userRepositary = UserRepositary()
+//        val emailService = EmailService()
+//        val userRegistrationService = UserRegistrationService(userRepositary,emailService)
+
+        val component = DaggerUserRegistrationComponent.builder().build()
+
+        val userRegistrationService = component.getUserRegistration()
+        userRegistrationService.registerUser("xyzzzz","111111")
+
+        val emailService = component.getEmailService()
     }
 }
